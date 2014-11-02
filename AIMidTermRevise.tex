@@ -16,17 +16,48 @@ We can think of an agent as an entity that takes a sequence of percepts through 
 
 A rational agent is one that tries to maximise its \textbf{performance measure} for each \textbf{percept sequence}. The performance measure evaluates any sequence of environment states.
 
-Task environments --> PEAS concept and properties
+\subsection*{Task environments}
+A task environment is defined by four entities (PEAS):
+\begin{itemize}
+  \item Performance measure
+  \item Environment
+  \item Actuators
+  \item Sensors
+\end{itemize}
 
+The properties of task environments (TE) are:
+\begin{description}
+  \item[Observability (full or partial)]
+    If an agent's sensors give it a full access to the state environment then we say the TE is fully observable. Fully observable environments are really helpful
+    because the agent do not need to maintain an internal state recording the percept history.
+  \item[Single vs. multiagent]
+    This is determined by the number of agents involved in the environment. For example in most table games we have multiagent TE in which \textbf{competitivity} and \textbf{cooperation} are very important in these cases.
+  \item[Deterministic vs. stochastic]
+    If the next state is completely determined by the current state then we say that the TE is deterministic; otherwise, it is stochastic.
+    Stochastic means that \textbf{uncertainty} about outcomes is quantified in terms of \textbf{probabilities}; on the other hand a non-deterministic TE is one in which actions are characterized by their possible outcome and no probabilities are involved.
+  \item[Episodic vs. sequential]
+  \item[Static vs. dynamic]
+  \item[Discrete vs. continuous]
+  \item[Known vs. unknown]
+\end{description}
+
+\subsection*{Type of agents}
 There are several intelligent agents; some of them are:
 \begin{itemize}
-  \item Simple-reflex
+  \item Simple-reflex agents
   \item Model-based reflex agents --> handle parital observability and keep track of the percept sequence up to date (internal state)
   \item Goal-based agents
   \item Utility-based agents
   \item Knowledge-based agents
 \end{itemize}
 
-State representations --> atomic, factored (attr, value), structured (objects)
+\subsubsection*{Simple-reflex agents}
+Simple-reflex agents are the most basic ones: they map a given percept sequence into one specific action.
+
+\subsubsection*{Model-based reflex agents}
+
+
+\subsection*{State representations}
+State representation --> atomic, factored (attr, value), structured (objects)
 
 \end{document}
