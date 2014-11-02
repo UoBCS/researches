@@ -9,10 +9,13 @@
 
 \abstract{
 In this article we are going to cover the topics learned during the first term of the module ``Intro to AI''.
+So 
 }
 
 \section{Intelligent agents and task environments}
 We can think of an agent as an entity that takes a sequence of percepts through \textbf{sensors} from the environment and maps it to an action using \textbf{actuators} (it may affect the environment). The mapping is performed by an \textbf{agent function}.
+
+\emph{agent = architecture + program}
 
 A rational agent is one that tries to maximise its \textbf{performance measure} for each \textbf{percept sequence}. The performance measure evaluates any sequence of environment states.
 
@@ -36,9 +39,12 @@ The properties of task environments (TE) are:
     If the next state is completely determined by the current state then we say that the TE is deterministic; otherwise, it is stochastic.
     Stochastic means that \textbf{uncertainty} about outcomes is quantified in terms of \textbf{probabilities}; on the other hand a non-deterministic TE is one in which actions are characterized by their possible outcome and no probabilities are involved.
   \item[Episodic vs. sequential]
+    If the current state is completely independent from the previous state then the TE is referred as episodic (e.g. assembly line)
   \item[Static vs. dynamic]
+    If the agent's action can change the state environment then the TE is called dyanamic; otherwise it is static.
   \item[Discrete vs. continuous]
   \item[Known vs. unknown]
+    This does not refer to the environment itself but to the agent's knowledge about the environment. In a known environment, the outcomes for all actions are given.
 \end{description}
 
 \subsection*{Type of agents}
@@ -52,12 +58,32 @@ There are several intelligent agents; some of them are:
 \end{itemize}
 
 \subsubsection*{Simple-reflex agents}
-Simple-reflex agents are the most basic ones: they map a given percept sequence into one specific action.
+Simple-reflex agents are the most basic ones: they map the \emph{current} percept to an action ignoring the entire percept history.
+The agent function can be implemented as a table where entries are \textbf{if-then} or \textbf{condition-action} rules.
 
 \subsubsection*{Model-based reflex agents}
+In partially observable environments we need to implement an internal state that keeps track of the state environments (i.e. has a percepts history).
+In order to update the internal state of the agent the knowledge requirements are:
+\begin{itemize}
+  \item Information about how the world evolves without the intervention of the agent
+  \item Information about how the agent's action affect the state environment
+\end{itemize}
+
+\subsubsection*{Goal-based agents}
+When the agent is faced with decisions then \textbf{goal information} is needed. Therefore the agent need a strategy to find a path (possibly optimal) to reach the goal.
+
+\subsubsection*{Utility-based agents}
+Goals are not enough to generate a high-quality behaviour in most environments. We need a measure of the quality (or optimality) of the agent's actions and their outcome; this is called a \textbf{utility}. A rational utility-based agent chooses the action that maximizes the \textbf{expected utility} of the action outcomes.
+
+\subsubsection*{Knowledge-based agents}
 
 
 \subsection*{State representations}
 State representation --> atomic, factored (attr, value), structured (objects)
+
+\section{Uninformed search}
+
+\section{Informed search and heuristics}
+\section{Adversarial search and game playing}
 
 \end{document}
