@@ -135,7 +135,7 @@ We can evaluate a search algorithm performace in four ways:
 \subsection*{Breadth-first search}
 \textbf{BFS} is a simple search strategy that starts from the initial state and expands its children then their successors and so on (the shallowest unexpanded node is chosen for expansion). The data structure for the frontier is a FIFO queue (First In First Out). Now let's look at the performance for BFS:
 \begin{itemize}
-  \item Completeness: BFS is complete because it looks for all children of a given node
+  \item Completeness: BFS is complete because it looks for all children of a given node (for finite branching factor)
   \item Optimality: BFS is not optimal
   \item Time complexity: $O(b^d)$ where $b$ is the \textbf{branching factor} and $d$ is the \textbf{depth} of the solution
   \item Space complexity: $O(b^d)$
@@ -144,10 +144,31 @@ We can evaluate a search algorithm performace in four ways:
 \subsection*{Uniform cost search}
 BFS is optimal if the step costs are equal. When dealing with different step costs we must chose the node with the lowest path cost $g(n)$ (not the shallowest node). This is achieved by having the frontier as a \textbf{priority queue}. Another difference with BFS is that the goal test is applied when a node is selected for expansion and not when it is first generated.
 
+Uniform cost search is generally optimal and completeness is guaranteed provided that the cost of every step exceeds some small positive constant $\varepsilon$.
+When all step costs are the same, uniform cost search acts like BFS. Time and space complexity do not simply depend on $b$ and $d$ because there are involved path costs (not depths). Let $C*$ be the cost of the optimal solution, and assume that every action costs at least $\varepsilon$. Therefore, in the worst case time and space complexity is $O(b^{1+ [C*/\varepsilon]})$.
+
 \subsection*{Depth-first search}
-\textbf{DFS} always expands the deepest node in the current frontier of the search tree. When DFS reaches a leaf node it \emph{backs up} 
+\textbf{DFS} always expands the deepest node in the current frontier of the search tree. When DFS reaches a leaf node it \emph{backs up} to the next deepest node that has still unexplored children. The frontier is implemented as a LIFO stack (Last In First Out) because it picks up the newest generated node.
+The tree-search version of DFS is not complete in infinite state space (the graph-search version is complete in finite space) nor optimal.
+
+Let $m$ be the maximum depth of any node, thus the time complexity is $O(b^m)$ and the space complexity is $O(b*m)$ because we keep track only of the nodes on the current path.
+
+\subsection*{Depth-limited search}
+For infinite state spaces DFS is incomplete; a solution may be setting a limit to the search $l$. Thus level at depth $l$ are treated as leaf nodes. Time complexity is $O(b^l)$ and space complexity is $O(b*l).
+
+\subsection*{Iterative deepening depth-first search}
+The basic idea of iterative deepening search is:
+\begin{itemize}
+  \item Explore to one level
+  \item If no solution is found, restart from the root and explore to the next level
+\end{itemize}
+
+IDS is complete even for infinite state spaces, is optimal and its space complexity is $O(b*d)$ because it keeps only the recent path. As for time complexity it may seem that IDS do a lot of work but only the current iteration is relevant (the previous ones are asymptotically insignificant). Thus, time complexity for IDS is $O(b^d).
 
 \section{Informed search and heuristics}
+Informed search strategies uses problem-specific knowledge in addition to the information given by the problem definition.
+The general approach is called \textbf{best-first search} in which we use an \textbf{evaluation function} $f(n)$ to expand nodes. The node with the lowest $f(n)$ will be selected first for expansion. The choice of $f$ determines the search strategy.
+
 \section{Adversarial search and game playing}
 
 \end{document}
