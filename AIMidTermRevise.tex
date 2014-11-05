@@ -137,9 +137,15 @@ We can evaluate a search algorithm performace in four ways:
 \begin{itemize}
   \item Completeness: BFS is complete because it looks for all children of a given node
   \item Optimality: BFS is not optimal
-  \item Time complexity: $O(b)$
+  \item Time complexity: $O(b^d)$ where $b$ is the \textbf{branching factor} and $d$ is the \textbf{depth} of the solution
+  \item Space complexity: $O(b^d)$
 \end{itemize}
 
+\subsection*{Uniform cost search}
+BFS is optimal if the step costs are equal. When dealing with different step costs we must chose the node with the lowest path cost $g(n)$ (not the shallowest node). This is achieved by having the frontier as a \textbf{priority queue}. Another difference with BFS is that the goal test is applied when a node is selected for expansion and not when it is first generated.
+
+\subsection*{Depth-first search}
+\textbf{DFS} always expands the deepest node in the current frontier of the search tree. When DFS reaches a leaf node it \emph{backs up} 
 
 \section{Informed search and heuristics}
 \section{Adversarial search and game playing}
