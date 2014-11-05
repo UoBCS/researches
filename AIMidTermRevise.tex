@@ -154,7 +154,7 @@ The tree-search version of DFS is not complete in infinite state space (the grap
 Let $m$ be the maximum depth of any node, thus the time complexity is $O(b^m)$ and the space complexity is $O(b*m)$ because we keep track only of the nodes on the current path.
 
 \subsection*{Depth-limited search}
-For infinite state spaces DFS is incomplete; a solution may be setting a limit to the search $l$. Thus level at depth $l$ are treated as leaf nodes. Time complexity is $O(b^l)$ and space complexity is $O(b*l).
+For infinite state spaces DFS is incomplete; a solution may be setting a limit to the search $l$. Thus level at depth $l$ are treated as leaf nodes. Time complexity is $O(b^l)$ and space complexity is $O(b*l)$.
 
 \subsection*{Iterative deepening depth-first search}
 The basic idea of iterative deepening search is:
@@ -163,11 +163,30 @@ The basic idea of iterative deepening search is:
   \item If no solution is found, restart from the root and explore to the next level
 \end{itemize}
 
-IDS is complete even for infinite state spaces, is optimal and its space complexity is $O(b*d)$ because it keeps only the recent path. As for time complexity it may seem that IDS do a lot of work but only the current iteration is relevant (the previous ones are asymptotically insignificant). Thus, time complexity for IDS is $O(b^d).
+IDS is complete even for infinite state spaces, is optimal and its space complexity is $O(b*d)$ because it keeps only the recent path. As for time complexity it may seem that IDS do a lot of work but only the current iteration is relevant (the previous ones are asymptotically insignificant). Thus, time complexity for IDS is $O(b^d)$.
 
-\section{Informed search and heuristics}
+\section{Informed search}
 Informed search strategies uses problem-specific knowledge in addition to the information given by the problem definition.
-The general approach is called \textbf{best-first search} in which we use an \textbf{evaluation function} $f(n)$ to expand nodes. The node with the lowest $f(n)$ will be selected first for expansion. The choice of $f$ determines the search strategy.
+The general approach is called \textbf{best-first search} in which we use an \textbf{evaluation function} $f(n)$ to expand nodes. The node with the lowest $f(n)$ will be selected first for expansion. The choice of $f$ determines the search strategy. Usually $f$ has a \textbf{heuristic} component $h$:
+
+\indent $h(n)$: the estimated cost of the cheapest path from the state at node $n$ to the goal state.
+
+\subsection*{Greedy best-first search}
+\textbf{Greedy best-first search} tries to expand the nodes that are near to the goal state. That is it expands the nodes that have the lowest $f(n) = h(n)$.
+
+\subsection*{A* search}
+
+\section{Heuristics}
+
+\section{Beyond classical search}
+
+\subsection{Background}
+
+\subsection*{Hill climbing}
+
+\subsection*{Stochastic hill climbing}
+
+\subsection*{Simulated annealing}
 
 \section{Adversarial search and game playing}
 
