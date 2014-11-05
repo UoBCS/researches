@@ -63,7 +63,7 @@ There are several intelligent agents; some of them are:
   \item Model-based reflex agents --> handle parital observability and keep track of the percept sequence up to date (internal state)
   \item Goal-based agents
   \item Utility-based agents
-  \item Knowledge-based agents
+  \item Learning agents
 \end{itemize}
 
 \subsubsection*{Simple-reflex agents}
@@ -84,18 +84,62 @@ When the agent is faced with decisions then \textbf{goal information} is needed.
 \subsubsection*{Utility-based agents}
 Goals are not enough to generate a high-quality behaviour in most environments. We need a measure of the quality (or optimality) of the agent's actions and their outcome; this is called a \textbf{utility}. A rational utility-based agent chooses the action that maximizes the \textbf{expected utility} of the action outcomes.
 
-\subsubsection*{Knowledge-based agents}
-
+\subsubsection*{Learning agents}
+In this type of agent we add the concept of learning; in a unknown environment they are efficient because they try to familiarise with it in order to make it partially or fully known.
 
 \subsection*{State representations}
 An agent can deal with different state representations:
 \begin{description}
-  \item[Atomic]
-  \item[Factored]
-  \item[Structured]
+  \item[Atomic] The state is just an empty box (black box) without any internal structure (indivisible)
+  \item[Factored] The state can be seen as a set of attribute-value pairs (see constraint satisfaction problems)
+  \item[Structured] In each state we describe objects and their relationship to each other; structured representation is more expressive than the above ones.
 \end{description}
 
 \section{Uninformed search}
+As we have said, goal-based agents look ahead considering future actions and the desirability of their outcomes. In this section we will describe \textbf{problem-solving agents} and uninformed search algorithms (no additional information other than the problem definition).
+
+\subsection*{Steps for searching}
+In uninformed search we have a simple \emph{formulate, search, execute} design process described below:
+\begin{itemize}
+  \item In \textbf{goal formulation} we define a goal from the current situation (state) and performance measure.
+  \item \textbf{Problem formulation} is the process of considering what action to take given a goal.
+  \item \textbf{Search} is the process of looking for a finite sequence of actions that leads to the goal.
+  \item Once a solution has been found (i.e. a finite sequence of actions leading to the goal has beef found) the agent needs to \textbf{execute} it.
+\end{itemize}
+
+\subsection*{Problems}
+A problem can be defined by 5 components:
+\begin{itemize}
+  \item The \textbf{initial state} or initial configuration.
+  \item A description of the possible \textbf{actions}.
+  \item The \textbf{transition model}: a description of the outcomes of each action.
+  \item The \textbf{goal test} which determines whether a state is a goal state.
+  \item A \textbf{path cost} function that assigns a numeric cost to each path.
+\end{itemize}
+The \textbf{state space} is formed by the initial state, actions and the transition model. We can model the state space by a \textbf{graph}.
+A path is a sequence of states connected by a sequence of actions.
+
+When searching for a solution we consider different actions (or branches); we end up by constructing a \textbf{search tree}.
+The nodes correspond to states and actions to edges in the graph. From a given node we need to choose an action; we do this by \textbf{expanding} the current state. Therefore we \textbf{generate} new nodes by looking up for every legal action.
+The set of nodes that are available for expansion is called the \textbf{frontier}. The way in which nodes are selected for expansion determines the \textbf{search strategy} used by a specific algorithm.
+
+\subsection*{Measuring search algorithm performance}
+We can evaluate a search algorithm performace in four ways:
+\begin{itemize}
+  \item Completeness: if there is a solution, can the search algorithm find it?
+  \item Optimality: does the strategy solution find the optimal solution?
+  \item Time complexity: how long does it take to find a solution?
+  \item Space complexity: how much memory is needed to perform the given search algorithm?
+\end{itemize}
+
+\subsection*{Breadth-first search}
+\textbf{BFS} is a simple search strategy that starts from the initial state and expands its children then their successors and so on (the shallowest unexpanded node is chosen for expansion). The data structure for the frontier is a FIFO queue (First In First Out). Now let's look at the performance for BFS:
+\begin{itemize}
+  \item Completeness: BFS is complete because it looks for all children of a given node
+  \item Optimality: BFS is not optimal
+  \item Time complexity: $O(b)$
+\end{itemize}
+
 
 \section{Informed search and heuristics}
 \section{Adversarial search and game playing}
