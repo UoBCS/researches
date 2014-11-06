@@ -173,8 +173,20 @@ The general approach is called \textbf{best-first search} in which we use an \te
 
 \subsection*{Greedy best-first search}
 \textbf{Greedy best-first search} tries to expand the nodes that are near to the goal state. That is it expands the nodes that have the lowest $f(n) = h(n)$.
+GBFS is not optimal and not complete even for finite state space. It is incomplete because it could reach dead ends.
 
 \subsection*{A* search}
+\textbf{A* search} uses both the heuristic function and the cost function (cost to reach the node).
+
+\indent $f(n) = g(n) + h(n)$
+
+A* search is both complete and optimal (if the heuristic function satisfies some conditions); it is like uniform cost search but it uses $f$ and $g$ instead of only $g$.
+
+\subsubsection*{Conditions for optimality: admissibility and consistency}
+\begin{description}
+  \item[Admissibility] A heuristic function is admissible if it \emph{never overstimate} the cost to reach the goal.
+  \item[Consistency] $h(n) <= c(n, a, n') + h(n')$
+\end{description}
 
 \section{Heuristics}
 
