@@ -223,8 +223,17 @@ We may consider a state-space landscape where the elevation corresponds to:
 \end{itemize}
 
 \subsection*{Hill climbing}
+The basic idea of hill climbing search (\textbf{steepest-ascent} version) tries to improve the score of the objective function until it reaches a ``peak'' when no higher score states are reachable.
+This algorithm is also called \textbf{greedy local search} because it grabs a good neighbour state without looking ahead.
 
-\subsection*{Stochastic hill climbing}
+Hill climbing search can get stuck on:
+\begin{itemize}
+  \item Local maxima (or minima)
+  \item Ridges: sequence of local maxima (or minima)
+  \item Plateaux: shoulder (from which progress is possible) or flat maximum (no uphill exists)
+\end{itemize}
+
+The possible 
 
 \subsection*{Simulated annealing}
 
