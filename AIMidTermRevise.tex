@@ -192,7 +192,7 @@ A* search is both complete and optimal (if the heuristic function satisfies some
 Choosing a good heuristic function is very important for the performance of an algorithm. One way to determine the quality is the \textbf{effective branching factor} $b*$.
 It is defined as:
 
-\indent $N + 1 = 1 + b* + (b*)^2 + (b*)^3 + \ldots + (b*)^d$
+\[ N + 1 = 1 + b* + (b*)^2 + (b*)^3 + \ldots + (b*)^d \]
 
 Let us consider two heuristic functions $h_1$ and $h_2$ such that for every $n$ we have $h_2(n) \ge h_1(n)$. In this case we say that $h_2$ \textbf{dominates} $h_1$.
 
@@ -249,6 +249,19 @@ To improve the efficiency of local search we must have a \textbf{trade-off} betw
 
 SA derives from the process of annealing: if you heat a solid and then gradually cool it (slowly), large crystals will be formed.
 In 1982 Kirkpatrick took the idea and applied it to optimisation problems.
+
+The basic idea behind SA is: use SA to search for feasible solutions and converge to an optimal solution.
+Unlike hill climbing, simulated annealing chooses a random move from the neighbourhood.
+
+\begin{itemize}
+  \item Changes the parameter $T$ (used in checking the next neighbours) during the search
+  \item Starts with high values of \( T \) (i.e. random search)
+  \item The value of $T$ gradually decreases (like temperature going down to zero - frozen state)
+  \item To the end $T$ is very small and SA acts like pure hill climbing search
+\end{itemize}
+
+\subsection*{Beam search}
+\textbf{Beam search} instead of moving just with one 
 
 \section{Adversarial search and game playing}
 
