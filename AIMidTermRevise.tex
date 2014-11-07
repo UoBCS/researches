@@ -233,10 +233,27 @@ Hill climbing search can get stuck on:
   \item Plateaux: shoulder (from which progress is possible) or flat maximum (no uphill exists)
 \end{itemize}
 
-The possible 
+The possible solutions to the above issues are:
+\begin{itemize}
+  \item Randomise and restart
+  \item Increase the size of visitable neighbours (look ahead)
+  \item Stochastic hill-climbing
+\end{itemize}
 
 \subsection*{Simulated annealing}
+To improve the efficiency of local search we must have a \textbf{trade-off} between:
+\begin{itemize}
+  \item Hill-climbing search
+  \item Random walk
+\end{itemize}
+
+SA derives from the process of annealing: if you heat a solid and then gradually cool it (slowly), large crystals will be formed.
+In 1982 Kirkpatrick took the idea and applied it to optimisation problems.
 
 \section{Adversarial search and game playing}
+
+\subsection*{Minimax algorithm}
+
+\subsection*{Alpha-beta pruning}
 
 \end{document}
