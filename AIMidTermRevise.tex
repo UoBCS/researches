@@ -296,6 +296,10 @@ from there to the end of the game. Obviously, the minimax value of a terminal st
 its utility. Furthermore, given a choice, M AX prefers to move to a state of maximum value,
 whereas M IN prefers a state of minimum value.
 
+The \textbf{minmax algorithm} computes the minimax decision from the current state. It uses a recursive computation of minimax values of each successor state. The recursion proceeds all the way down to the leaves where the minimax values are \textbf{backed up} through the tree.
+
+The minimax algorithm performs a complete depth-first search of the game tree. Let $m$ be the maximum depth and $b$ the possible legal moves at each stage, the time complexity is $O(b^m)$ and the space complexity is $O(bm)$.
+
 \subsection*{Alpha-beta pruning}
 
 \end{document}
