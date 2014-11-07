@@ -293,13 +293,33 @@ A game can be defined by the following elements:
 Given a game tree, can be determined from the \textbf{minimax} value of each node, MINIMAX($n$).
 The minimax value of a node is the utility (for MAX) of being in the corresponding state, assuming that both players play optimally
 from there to the end of the game. Obviously, the minimax value of a terminal state is just
-its utility. Furthermore, given a choice, M AX prefers to move to a state of maximum value,
-whereas M IN prefers a state of minimum value.
+its utility. Furthermore, given a choice, MAX prefers to move to a state of maximum value,
+whereas MIN prefers a state of minimum value.
 
 The \textbf{minmax algorithm} computes the minimax decision from the current state. It uses a recursive computation of minimax values of each successor state. The recursion proceeds all the way down to the leaves where the minimax values are \textbf{backed up} through the tree.
 
 The minimax algorithm performs a complete depth-first search of the game tree. Let $m$ be the maximum depth and $b$ the possible legal moves at each stage, the time complexity is $O(b^m)$ and the space complexity is $O(bm)$.
 
+The pseudo-code is as follows:
+\begin{verbatim}
+function minimax(node, depth, maxPlayer)
+    if depth = 0 or node is a terminal node
+        return the heuristic value of node
+    if maximizingPlayer
+        bestValue := -inf
+        for each child of node
+            val := minimax(child, depth - 1, FALSE)
+            bestValue := max(bestValue, val)
+        return bestValue
+    else
+        bestValue := +inf
+        for each child of node
+            val := minimax(child, depth - 1, TRUE)
+            bestValue := min(bestValue, val)
+        return bestValue
+\end{verbatim}
+
 \subsection*{Alpha-beta pruning}
+The problem with minimax algorithm is that the 
 
 \end{document}
