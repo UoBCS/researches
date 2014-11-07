@@ -185,14 +185,29 @@ A* search is both complete and optimal (if the heuristic function satisfies some
 \subsubsection*{Conditions for optimality: admissibility and consistency}
 \begin{description}
   \item[Admissibility] A heuristic function is admissible if it \emph{never overstimate} the cost to reach the goal.
-  \item[Consistency] $h(n) <= c(n, a, n') + h(n')$
+  \item[Consistency] $h(n) \le c(n, a, n') + h(n')$ where $c(n, a, n')$ is the cost of getting from node $n$ to node $n'$ with some action $a$
 \end{description}
 
 \section{Heuristics}
+Choosing a good heuristic function is very important for the performance of an algorithm. One way to determine the quality is the \textbf{effective branching factor} $b*$.
+It is defined as:
+
+\indent $N + 1 = 1 + b* + (b*)^2 + (b*)^3 + \ldots + (b*)^d$
+
+Let us consider two heuristic functions $h_1$ and $h_2$ such that for every $n$ we have $h_2(n) \ge h_1(n)$. In this case we say that $h_2$ \textbf{dominates} $h_1$.
+
+\subsection*{Ways to generate heuristic functions}
+We can generate heuristic functions from:
+\begin{description}
+  \item[Relaxed problems] When we relax the constraints of a problem we get a subproblem which is generally simpler to solve. The state space grows and if there is an optimal solution in the original problem then there will be also in the relaxed problem. So, \emph{the cost of an optimal solution to a relaxed problem is an admissible heuristic for the original problem}.
+  \item[Pattern databases]
+  \item[Experience]
+\end{description}
 
 \section{Beyond classical search}
 
 \subsection{Background}
+In \textbf{local search} (in the state space) algorithms we deal with relaxed concepts of observability and determinism. Local search algorithms evaluate and modify one current state rather than systematically exploring paths from the initial state. These algorithms are suitable when we are just interested in the goal rather than the cost to get to a final state.
 
 \subsection*{Hill climbing}
 
