@@ -207,7 +207,20 @@ We can generate heuristic functions from:
 \section{Beyond classical search}
 
 \subsection{Background}
-In \textbf{local search} (in the state space) algorithms we deal with relaxed concepts of observability and determinism. Local search algorithms evaluate and modify one current state rather than systematically exploring paths from the initial state. These algorithms are suitable when we are just interested in the goal rather than the cost to get to a final state.
+In \textbf{local search} (in the state space) algorithms we deal with relaxed concepts of observability and determinism. Local search algorithms evaluate and modify one current state rather than systematically exploring paths from the initial state. These algorithms are suitable when we are just interested in the goal rather than the cost to get to a final state. If the path to the goal does not matter, we might consider a different class of algorithms that do not care about paths at all.
+Local search algorithms operate on a \textbf{current node} and generally move only to neighbours.
+Key advantages of local search:
+\begin{itemize}
+  \item Little usage of memory
+  \item Find solutions in reasonable times even for infinite state spaces
+\end{itemize}
+
+Local search algorithms are also useful for solving \textbf{optimisation problems} in which the aim is to find the best state according to an \textbf{objective function}.
+We may consider a state-space landscape where the elevation corresponds to:
+\begin{itemize}
+  \item Cost function: \textbf{global minimum}
+  \item Objective function: \textbf{global maximum}
+\end{itemize}
 
 \subsection*{Hill climbing}
 
