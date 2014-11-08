@@ -1,5 +1,7 @@
 \documentclass[a4paper, 11pt]{article}
 
+\usepackage{hyperref}
+
 \author{Ossama Edbali}
 \title{AI mid-term revision}
 
@@ -18,7 +20,6 @@ The major topics are:
   \item Heuristics
   \item Adversarial search and game playing
 \end{itemize}
-
 }
 
 \section{Intelligent agents and task environments}
@@ -28,7 +29,7 @@ We can think of an agent as an entity that takes a sequence of percepts through 
 
 A rational agent is one that tries to maximise its \textbf{performance measure} for each \textbf{percept sequence}. The performance measure evaluates any sequence of environment states.
 
-\subsection*{Task environments}
+\subsection{Task environments}
 A task environment is defined by four entities (PEAS):
 \begin{itemize}
   \item Performance measure
@@ -56,7 +57,7 @@ The properties of task environments (TE) are:
     This does not refer to the environment itself but to the agent's knowledge about the environment. In a known environment, the outcomes for all actions are given.
 \end{description}
 
-\subsection*{Type of agents}
+\subsection{Type of agents}
 There are several intelligent agents; some of them are:
 \begin{itemize}
   \item Simple-reflex agents
@@ -66,11 +67,11 @@ There are several intelligent agents; some of them are:
   \item Learning agents
 \end{itemize}
 
-\subsubsection*{Simple-reflex agents}
+\subsubsection{Simple-reflex agents}
 Simple-reflex agents are the most basic ones: they map the \emph{current} percept to an action ignoring the entire percept history.
 The agent function can be implemented as a table where entries are \textbf{if-then} or \textbf{condition-action} rules.
 
-\subsubsection*{Model-based reflex agents}
+\subsubsection{Model-based reflex agents}
 In partially observable environments we need to implement an internal state that keeps track of the state environments (i.e. has a percepts history).
 In order to update the internal state of the agent the knowledge requirements are:
 \begin{itemize}
@@ -78,16 +79,16 @@ In order to update the internal state of the agent the knowledge requirements ar
   \item Information about how the agent's action affect the state environment
 \end{itemize}
 
-\subsubsection*{Goal-based agents}
+\subsubsection{Goal-based agents}
 When the agent is faced with decisions then \textbf{goal information} is needed. Therefore the agent need a strategy to find a path (possibly optimal) to reach the goal.
 
-\subsubsection*{Utility-based agents}
+\subsubsection{Utility-based agents}
 Goals are not enough to generate a high-quality behaviour in most environments. We need a measure of the quality (or optimality) of the agent's actions and their outcome; this is called a \textbf{utility}. A rational utility-based agent chooses the action that maximizes the \textbf{expected utility} of the action outcomes.
 
-\subsubsection*{Learning agents}
+\subsubsection{Learning agents}
 In this type of agent we add the concept of learning; in a unknown environment they are efficient because they try to familiarise with it in order to make it partially or fully known.
 
-\subsection*{State representations}
+\subsection{State representations}
 An agent can deal with different state representations:
 \begin{description}
   \item[Atomic] The state is just an empty box (black box) without any internal structure (indivisible)
@@ -98,7 +99,7 @@ An agent can deal with different state representations:
 \section{Uninformed search}
 As we have said, goal-based agents look ahead considering future actions and the desirability of their outcomes. In this section we will describe \textbf{problem-solving agents} and uninformed search algorithms (no additional information other than the problem definition).
 
-\subsection*{Steps for searching}
+\subsection{Steps for searching}
 In uninformed search we have a simple \emph{formulate, search, execute} design process described below:
 \begin{itemize}
   \item In \textbf{goal formulation} we define a goal from the current situation (state) and performance measure.
@@ -107,7 +108,7 @@ In uninformed search we have a simple \emph{formulate, search, execute} design p
   \item Once a solution has been found (i.e. a finite sequence of actions leading to the goal has beef found) the agent needs to \textbf{execute} it.
 \end{itemize}
 
-\subsection*{Problems}
+\subsection{Problems}
 A problem can be defined by 5 components:
 \begin{itemize}
   \item The \textbf{initial state} or initial configuration.
@@ -123,7 +124,7 @@ When searching for a solution we consider different actions (or branches); we en
 The nodes correspond to states and actions to edges in the graph. From a given node we need to choose an action; we do this by \textbf{expanding} the current state. Therefore we \textbf{generate} new nodes by looking up for every legal action.
 The set of nodes that are available for expansion is called the \textbf{frontier}. The way in which nodes are selected for expansion determines the \textbf{search strategy} used by a specific algorithm.
 
-\subsection*{Measuring search algorithm performance}
+\subsection{Measuring search algorithm performance}
 We can evaluate a search algorithm performace in four ways:
 \begin{itemize}
   \item Completeness: if there is a solution, can the search algorithm find it?
@@ -132,7 +133,7 @@ We can evaluate a search algorithm performace in four ways:
   \item Space complexity: how much memory is needed to perform the given search algorithm?
 \end{itemize}
 
-\subsection*{Breadth-first search}
+\subsection{Breadth-first search}
 \textbf{BFS} is a simple search strategy that starts from the initial state and expands its children then their successors and so on (the shallowest unexpanded node is chosen for expansion). The data structure for the frontier is a FIFO queue (First In First Out). Now let's look at the performance for BFS:
 \begin{itemize}
   \item Completeness: BFS is complete because it looks for all children of a given node (for finite branching factor)
@@ -141,22 +142,22 @@ We can evaluate a search algorithm performace in four ways:
   \item Space complexity: $O(b^d)$
 \end{itemize}
 
-\subsection*{Uniform cost search}
+\subsection{Uniform cost search}
 BFS is optimal if the step costs are equal. When dealing with different step costs we must chose the node with the lowest path cost $g(n)$ (not the shallowest node). This is achieved by having the frontier as a \textbf{priority queue}. Another difference with BFS is that the goal test is applied when a node is selected for expansion and not when it is first generated.
 
 Uniform cost search is generally optimal and completeness is guaranteed provided that the cost of every step exceeds some small positive constant $\varepsilon$.
 When all step costs are the same, uniform cost search acts like BFS. Time and space complexity do not simply depend on $b$ and $d$ because there are involved path costs (not depths). Let $C*$ be the cost of the optimal solution, and assume that every action costs at least $\varepsilon$. Therefore, in the worst case time and space complexity is $O(b^{1+ [C*/\varepsilon]})$.
 
-\subsection*{Depth-first search}
+\subsection{Depth-first search}
 \textbf{DFS} always expands the deepest node in the current frontier of the search tree. When DFS reaches a leaf node it \emph{backs up} to the next deepest node that has still unexplored children. The frontier is implemented as a LIFO stack (Last In First Out) because it picks up the newest generated node.
 The tree-search version of DFS is not complete in infinite state space (the graph-search version is complete in finite space) nor optimal.
 
 Let $m$ be the maximum depth of any node, thus the time complexity is $O(b^m)$ and the space complexity is $O(b*m)$ because we keep track only of the nodes on the current path.
 
-\subsection*{Depth-limited search}
+\subsection{Depth-limited search}
 For infinite state spaces DFS is incomplete; a solution may be setting a limit to the search $l$. Thus level at depth $l$ are treated as leaf nodes. Time complexity is $O(b^l)$ and space complexity is $O(b*l)$.
 
-\subsection*{Iterative deepening depth-first search}
+\subsection{Iterative deepening depth-first search}
 The basic idea of iterative deepening search is:
 \begin{itemize}
   \item Explore to one level
@@ -171,18 +172,18 @@ The general approach is called \textbf{best-first search} in which we use an \te
 
 \indent $h(n)$: the estimated cost of the cheapest path from the state at node $n$ to the goal state.
 
-\subsection*{Greedy best-first search}
+\subsection{Greedy best-first search}
 \textbf{Greedy best-first search} tries to expand the nodes that are near to the goal state. That is it expands the nodes that have the lowest $f(n) = h(n)$.
 GBFS is not optimal and not complete even for finite state space. It is incomplete because it could reach dead ends.
 
-\subsection*{A* search}
+\subsection{A* search}
 \textbf{A* search} uses both the heuristic function and the cost function (cost to reach the node).
 
 \indent $f(n) = g(n) + h(n)$
 
 A* search is both complete and optimal (if the heuristic function satisfies some conditions); it is like uniform cost search but it uses $f$ and $g$ instead of only $g$.
 
-\subsubsection*{Conditions for optimality: admissibility and consistency}
+\subsubsection{Conditions for optimality: admissibility and consistency}
 \begin{description}
   \item[Admissibility] A heuristic function is admissible if it \emph{never overstimate} the cost to reach the goal.
   \item[Consistency] $h(n) \le c(n, a, n') + h(n')$ where $c(n, a, n')$ is the cost of getting from node $n$ to node $n'$ with some action $a$
@@ -196,7 +197,7 @@ It is defined as:
 
 Let us consider two heuristic functions $h_1$ and $h_2$ such that for every $n$ we have $h_2(n) \ge h_1(n)$. In this case we say that $h_2$ \textbf{dominates} $h_1$.
 
-\subsection*{Ways to generate heuristic functions}
+\subsection{Ways to generate heuristic functions}
 We can generate heuristic functions from:
 \begin{description}
   \item[Relaxed problems] When we relax the constraints of a problem we get a subproblem which is generally simpler to solve. The state space grows and if there is an optimal solution in the original problem then there will be also in the relaxed problem. So, \emph{the cost of an optimal solution to a relaxed problem is an admissible heuristic for the original problem}.
@@ -222,7 +223,7 @@ We may consider a state-space landscape where the elevation corresponds to:
   \item Objective function: \textbf{global maximum}
 \end{itemize}
 
-\subsection*{Hill climbing}
+\subsection{Hill climbing}
 The basic idea of hill climbing search (\textbf{steepest-ascent} version) tries to improve the score of the objective function until it reaches a ``peak'' when no higher score states are reachable.
 This algorithm is also called \textbf{greedy local search} because it grabs a good neighbour state without looking ahead.
 
@@ -240,7 +241,7 @@ The possible solutions to the above issues are:
   \item Stochastic hill-climbing
 \end{itemize}
 
-\subsection*{Simulated annealing}
+\subsection{Simulated annealing}
 To improve the efficiency of local search we must have a \textbf{trade-off} between:
 \begin{itemize}
   \item Hill-climbing search
@@ -260,7 +261,7 @@ Unlike hill climbing, simulated annealing chooses a random move from the neighbo
   \item To the end $T$ is very small and SA acts like pure hill climbing search
 \end{itemize}
 
-\subsection*{Beam search}
+\subsection{Beam search}
 \textbf{Beam search} instead of moving just with one node (keep just one state in memory) it keeps track of $k$ nodes. It begins with $k$ randomly generated states. At each step all successors of the $k$ nodes are generated. If any one of them is a goal state then the algorithm stops. \emph{In a local beam search, useful information is exchanged betweek the parallel search threads}.
 In its simplest form, local beam search can suffer from a lack of diversity among the
 k states.
@@ -272,7 +273,7 @@ an increasing function of its value. Stochastic beam search bears some resemblan
 process of natural selection, whereby the “successors” (offspring) of a “state” (organism)
 populate the next generation according to its “value” (fitness).
 
-\subsection*{Genetic algorithms}
+\subsection{Genetic algorithms}
 A \textbf{genetic algorithm} (GA) is a variant of stochastic beam search were successors are generated by two \emph{parent} states rather than by modifying a single state (for further details see textbook).
 
 \section{Adversarial search and game playing}
@@ -289,7 +290,7 @@ A game can be defined by the following elements:
   \item UTILITY($s, p$): A \textbf{utility function} defines the final numeric value for a game that ends in the state $s$ for a player $p$.
 \end{itemize}
 
-\subsection*{Minimax algorithm}
+\subsection{Minimax algorithm}
 Given a game tree, can be determined from the \textbf{minimax} value of each node, MINIMAX($n$).
 The minimax value of a node is the utility (for MAX) of being in the corresponding state, assuming that both players play optimally
 from there to the end of the game. Obviously, the minimax value of a terminal state is just
@@ -319,7 +320,7 @@ function minimax(node, depth, maxPlayer)
         return bestValue
 \end{verbatim}
 
-\subsection*{Alpha-beta pruning}
+\subsection{Alpha-beta pruning}
 The problem with minimax algorithm is that the nodes generated are exponential in the depth of the tree.
 We can use the concept of \textbf{pruning}, that is eliminate from the search tree paths that are likely to be useless for the final decision (not influencial).
 
