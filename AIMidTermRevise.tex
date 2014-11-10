@@ -193,7 +193,7 @@ A* search is both complete and optimal (if the heuristic function satisfies some
 Choosing a good heuristic function is very important for the performance of an algorithm. One way to determine the quality is the \textbf{effective branching factor} $b*$.
 It is defined as:
 
-\[ N + 1 = 1 + b* + (b*)^2 + (b*)^3 + \ldots + (b*)^d \]
+\[ N + 1 = 1 + b^* + (b^*)^2 + (b^*)^3 + \ldots + (b^*)^d \]
 
 Let us consider two heuristic functions $h_1$ and $h_2$ such that for every $n$ we have $h_2(n) \ge h_1(n)$. In this case we say that $h_2$ \textbf{dominates} $h_1$.
 
@@ -262,7 +262,7 @@ Unlike hill climbing, simulated annealing chooses a random move from the neighbo
 \end{itemize}
 
 \subsection{Beam search}
-\textbf{Beam search} instead of moving just with one node (keep just one state in memory) it keeps track of $k$ nodes. It begins with $k$ randomly generated states. At each step all successors of the $k$ nodes are generated. If any one of them is a goal state then the algorithm stops. \emph{In a local beam search, useful information is exchanged betweek the parallel search threads}.
+\textbf{Beam search} instead of moving just with one node (keep just one state in memory) it keeps track of $k$ nodes. It begins with $k$ randomly generated states. At each step all successors of the $k$ nodes are generated. If any one of them is a goal state then the algorithm stops. \emph{In a local beam search, useful information is exchanged between the parallel search threads}.
 In its simplest form, local beam search can suffer from a lack of diversity among the
 k states.
 
