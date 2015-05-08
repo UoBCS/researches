@@ -17,7 +17,7 @@
 \begin{quote} \bf}
 {\end{quote}}
 
-\title{Pattern matching in JavaScript} 
+\title{Practical introduction to fold using JavaScript} 
 
 \author
 {Ossama Edbali\\
@@ -44,23 +44,67 @@
 % Abstract
 
 \begin{mabstract}
-	Pattern matching is a powerful control structure that defines function by case analysis.
-	It is suited for inductive/recursive functions as well as for normal exact matching (like
-	switch constructs). This powerful tool combines conditional, unification,
-	data destructuring and variable binding.
+	Fold (or reduce) is a higher-order consumer function that gives to the programmer
+	a simple pattern of recursion for processing lists. It is an essential pattern
+	in functional programming. It uses a combining function applied initially to a start
+	value and an element of the list and processes recursively the items of the list
+	building up a return value.
+	In other words folding a list means to \textit{reduce} a list into a single value.
 \end{mabstract}
 
 \section*{Introduction}
-Functional programming language provide pattern matching as a fundamental structure to build functions
-by destructing/decomposing the input data. JavaScript has a variety of aspects of functional programming
-such as higher order functions, closures and arrow functions (functions
-are first-class citizens!). Since JavaScript is not a strongly typed language, sometimes
-there is a need to match consistently (i.e. with type checking, exhaustiveness etc\ldots)
-against some patterns.
+This article is an introductory and practical tutorial on fold using JavaScript. Therefore theoretical
+properties of fold as well as its universality are not covered here. For an insight on these topics
+see \ldots
+I am more focussed on the utility of this pattern in everyday programming as well as giving a taste
+of a wider topic: functional programming.
 
-\section*{Implementation}
+\section*{Fold by examples}
+Below you can find some functions implemented using the fold pattern. The first two are the actual
+implementation of fold (right and left).
 
-\section*{Performance}
+\subsection*{Fold right}
+
+\subsection*{Fold left}
+
+\subsection*{Size}
+
+\subsection*{Sum}
+
+\subsection*{Reverse}
+
+\subsection*{Filter}
+
+\subsection*{Any}
+
+\subsection*{Average}
+
+\subsection*{Partition}
+
+\subsection*{For each}
+
+\subsection*{Map}
+
+\subsection*{Composition}
+
+\subsection*{Count}
+
+\subsection*{Drop}
+
+\subsection*{Flatten}
+
+\subsection*{Insertion sort}
+
+\subsection*{Join}
+
+\subsection*{Remove consecutive}
+
+
+\section*{Comments}
+
+
+\section*{Contributing}
+
 
 \section*{Formatting Citations}
 
