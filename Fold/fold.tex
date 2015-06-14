@@ -97,15 +97,35 @@
 \section*{Introduction}
 This article is an introductory and practical tutorial on fold using JavaScript. Therefore theoretical
 properties of fold as well as its universality are not covered here. For an insight on these topics
-see \ldots
+see \cite{univ_fold}.
 I am more focussed on the utility of this pattern in everyday programming as well as giving a taste
 of a wider topic: functional programming.
+
+\section*{Overview}
+The fold pattern has several advantages:
+\begin{itemize}
+	\item produce short, elegant code for problems involving lists or collections \cite{cornell_fold}
+	\item useful for large-scale highly parallel data processing
+	\item generalise \textit{any} function that is defined on two elements to apply to an arbitrary number of elements
+\end{itemize}
+
+On lists, there are two ways to combine the elements: either by recursively combining the first element with the results of combining the rest (\textbf{right fold}) or by recursively combining the results of combining all but the last element with the last one, (\textbf{left fold}).
+
+One important thing to note when there is lazy evaluation (see Haskell),
+is that fold right can operate with infinite lists because if \verb|f| is able to produce some part
+of its result without reference to the recursive case, and the rest of the result is never demanded,
+then the recursion will stop. However, fold right will immediately call itself with new values until
+it reaches the end of the list. This tail recursion can be efficiently compiled as a loop,
+but can't deal with infinite lists at all. 
+
 
 \section*{Fold by examples}
 Below you can find some functions implemented using the fold pattern. The first two are the actual
 implementation of fold (right and left).
 
 In these examples I will use some useful functions:
+
+\newpage
 
 \textbf{Check if an object is an array}
 \medskip
@@ -122,7 +142,7 @@ function dctor (arr) {
 	return {
     	'hd': arr[0],
     	'tl': arr.slice(1)
-    };
+	};
 }
 \end{lstlisting}
 
@@ -149,10 +169,12 @@ function foldL (arr, f, init) {
 	}
 	else {
 		var p = dctor(arr);
-		return _foldL(p.tl, f, f(init, p.hd));
+		return foldL(p.tl, f, f(init, p.hd));
 	}
 }
 \end{lstlisting}
+
+\newpage
 
 \subsection*{Size}
 Here we define an anonymous function with the following arguments:
@@ -192,50 +214,171 @@ function reverse (arr) {
 
 
 \subsection*{Filter}
+\medskip
+\begin{lstlisting}
+function filter (arr, f) {
+	return foldL(arr, function (a, x) {
+		if (f(x)) {
+			a.push(x);
+		}
 
-
-\subsection*{Any}
-
-\subsection*{Average}
+		return a;
+	}, []);
+}
+\end{lstlisting}
 
 \subsection*{Partition}
+This function splits the original array into two sets: one that contains those elements that
+satisfies a given predicate and another that contains the rest. Here the return
+type is an object with the properties 'T' (true) and 'F' (false) which point to arrays.
+
+\medskip
+\begin{lstlisting}
+function partition (arr, f) {
+	return foldL(arr, function (a, x) {
+
+		if (f(x)) {
+			a.T.push(x);
+		}
+		else {
+			a.F.push(x);
+		}
+		
+		return a;
+
+	}, {'T': [], 'F': []});
+}
+\end{lstlisting}
 
 \subsection*{For each}
+\medskip
+\begin{lstlisting}
+function forEach (arr, f) {
+	return foldL(arr, function (a, x) { f(x); }, undefined);
+}
+\end{lstlisting}
 
 \subsection*{Map}
+We can define the higher-order function map in 2 ways:
+\begin{itemize}
+	\item using iteration and applying the given function to each element
+	\item using fold left-to-right with the initial value as the empty array
+\end{itemize}
+
+\medskip
+\begin{lstlisting}
+function map (arr, f) {
+	return foldL(arr, function (a, x) {
+		a.push(f(x));
+		return a;
+	}, []);
+}
+\end{lstlisting}
 
 \subsection*{Composition}
+This function combines an array of functions to form a single function. The initial value is the
+identity function.
 
-\subsection*{Count}
+Example: let \verb|a = [f, g, h]| be an array of pre-defined functions.
 
-\subsection*{Drop}
+Then \verb|composition(a)| return the fusion of these functions: \verb|f(g(h(x)))|
+
+\medskip
+\begin{lstlisting}
+function compose (f, g) {
+	return function (x) {
+		return f(g(x));
+	};
+}
+
+function identity (x) { return x; };
+
+function composition (arr) {
+	return foldR(arr, compose, identity);
+}
+\end{lstlisting}
 
 \subsection*{Flatten}
+\medskip
+\begin{lstlisting}
+function flatten (arr, deep) {
+
+	return foldL(arr, function (a, x) {
+	
+		a.pushArray(deep && isArray(x) ? flatten(x) : x);
+		return a;
+		
+	}, []);
+	
+}
+\end{lstlisting}
 
 \subsection*{Insertion sort}
+With fold we can even implement insertion sort.
+The initial value is the empty array and the combining function takes a sorted array
+(accumulated value) and a value and inserts it into the array (respecting the ordering).
 
-\subsection*{Join}
+\medskip
+\begin{lstlisting}
+function insert (arr, x) {
+	if (isEmpty(arr)) {
+		return [x]; // One-element array
+	}
+	else {
+		var p = dctor(arr),
+			y = p.hd, // Get head
+			ys = p.tl, // Get tail
+			newArr;
+			
+		if (x < y) {
+			newArr = [x, y];
+			newArr.pushArray(ys);
+		}
+		else {
+			newArr = [y];
+			newArr.pushArray(_insert(ys, x));
+		}
+		
+		return newArr;
+	}
+}
 
-\subsection*{Remove consecutive}
+function insertionSort (arr) {
+	return foldL(arr, insert, []);
+}
+\end{lstlisting}
 
-\section*{Comments}
-
+\newpage
 
 \section*{Contributing}
-
-
-% \cite{}
+If you want to contribute to the GitHub repository (where you can find all the above functions and more)
+just open an issue or submit a pull request. Here is the link for the repository to clone on
+your machine: \verb|https://github.com/oss6/fold|
 
 \begin{thebibliography}{9}
-	\bibitem{lamport94}
-  	Leslie Lamport,
-	\emph{\LaTeX: a document preparation system},
-	Addison Wesley, Massachusetts,
-  	2nd edition,
-  	1994.
+	\bibitem{pmchicago}
+  	"Pattern Matching",
+  	The University Of Chicago,
+  	accessed June 14, 2015,
+  	http://www2.lib.uchicago.edu/keith/ocaml-class/pattern-matching.html
+  	
+  	\bibitem{univ_fold}
+  	Graham Hutton,
+  	"A tutorial on the universality and expressiveness of fold,"
+  	University of Nottingham
+  	(1999).
+  	
+  	\bibitem{cornell_fold}
+  	"Mapping and Folding and the Map-Reduce Paradigm,"
+  	Cornell University - Department of Computer Science,
+  	accessed June 14, 2015,
+  	https://www.cs.cornell.edu/courses/cs3110/2009sp/lectures/lec05.html
+  	
+  	\bibitem{haskell_fold}
+  	"Fold,"
+  	HaskellWiki,
+  	accessed June 14, 2015,
+  	https://wiki.haskell.org/Fold
 \end{thebibliography}
 
 \end{document}
-
-% References:
-% http://www2.lib.uchicago.edu/keith/ocaml-class/pattern-matching.html
